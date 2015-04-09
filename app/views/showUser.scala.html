@@ -1,0 +1,21 @@
+@(users: List[User])
+
+@main("ユーザ一覧") {
+
+<h1>ユーザ一覧</h1>
+
+
+ <ul>
+        @for(user <- users) {
+	    <li>
+            @user.name
+            @user.password
+            @user.email
+            @user.admin
+	    </li>
+        }
+ </ul>
+
+
+<a href="/adduser">トップへ戻る</a>
+}

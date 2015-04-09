@@ -5,5 +5,13 @@
 # Home page
 GET     /                           controllers.Application.index()
 
+# Addsers
+
+GET    /adduser                    controllers.Application.newUser()
+POST   /adduser                    controllers.Application.addUser()
+GET    /adduser/allusers           controllers.Application.allUsers()
+
+
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
