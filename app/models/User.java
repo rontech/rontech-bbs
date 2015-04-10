@@ -4,10 +4,9 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
+import play.api.mvc.*;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
-import play.db.ebean.Model.Finder;
 
 @Entity
 public class User extends Model {
@@ -34,4 +33,8 @@ public class User extends Model {
 	public static void create(User user) {
 		 user.save();
     }
+	/** 削除するためidを探さなければ */
+	public static void delete(Long id){
+		find.ref(id).delete();
+	}
 }

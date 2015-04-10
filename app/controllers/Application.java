@@ -6,6 +6,7 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.*;
+import play.api.mvc.*;
 
 public class Application extends Controller {
 
@@ -28,20 +29,30 @@ public class Application extends Controller {
      *  コントローラのallUsers()にredirect
      */
     public static Result addUser() {
+    	/** ユーザから要求フォーム作成 */
         Form<User> filledForm = userForm.bindFromRequest();
-
+        /** もしユーザの入力を間違ったら、エラーを表示する */
         if (filledForm.hasErrors()) {
             return badRequest(views.html.index.render(filledForm));
-        } else {
+        }
+        /**Userのcreateのメソッドを呼ぶ出す、コントローラのallUsers()にredirect*/
+        else {
             User.create(filledForm.get());
             return redirect(routes.Application.allUsers());
         }
     }
     /** 全てのユーザ情報を表示 */
     public static Result allUsers() {
-
+    	/**すべて新規ユーザ一覧を表示する*/
         return ok(views.html.showUser.render(User.all()));
 
+    }
+    /** 削除機能を追加するため*/
+    public static Result deleteUser(Long id){
+    	/**モデルの削除メソッドを呼びたす*/
+    	User.delete(id);
+    	/**すべて新規ユーザ一覧を表示する*/
+    	return redirect(routes.Application.allUsers());
     }
 
 }
