@@ -1,0 +1,33 @@
+@(user: User,userForm:Form[User])
+
+
+@import helper._
+
+@main("ユーザ更新") {
+
+<h2>ユーザ更新</h2>
+	@form(routes.Users.updateUser(user id)){
+
+
+	<input type="hidden" value="@user.id" name="id">
+	<input type="text" value="@user.name" name="name">
+	<input type="text" value="@user.password" name="password">
+	<input type="text" value="@user.email"    name="email">
+
+	<input type="radio" name="admin" value="true" checked="checked">管理者</input>
+	<input type="radio" name="admin" value="false">一般ユーザ</input>
+	<li>
+
+	 <button type="submit">更新</button>
+	 </li>
+
+<li><a href="/users/allusers ">前に戻る</a></li>
+<li><a href="/users">トップへ戻る</a></li>
+
+<p>
+<input type="button" value="トップへ戻る"onclick="history.back()">"
+<input type="button" value="前に戻る" onclick="history.back()">
+</p>
+
+}
+}

@@ -37,4 +37,12 @@ public class User extends Model {
 	public static void delete(Long id){
 		find.ref(id).delete();
 	}
+	/** 選択機能を実装する*/
+	public static User select(Long id){
+		return find.ref(id);
+	}
+	/** 新しい情報を変更するために、newUserの変数を定義する*/
+	public static void update(User newUser){
+		newUser.update();
+	}
 }

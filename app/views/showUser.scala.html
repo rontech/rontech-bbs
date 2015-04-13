@@ -7,7 +7,7 @@
 <h1>ユーザ一覧</h1>
 
 
- <ul>   <h4> Name Password Email</h4>
+ <ul>   <h4> 名前 パスワード メールアドレス  管理員</h4>
 
         @for(user <- users) {
 	    <li>
@@ -16,21 +16,29 @@
             @user.email
             @user.admin
 
-				@form(routes.Application.deleteUser(user.id)) {
+				@form(routes.Users.deleteUser(user.id)) {
 
-                    <input type="submit" value="delete" >
+                    <input type="submit" value="削除" >
                 }
 
+				@form(routes.Users.selectUser(user.id)){
 
+					<input type="submit" value="詳細" >
+
+
+
+					<a href="updateUser.scala.html"></a>
+}
 
 }
-             </li>
+</li>
 </ul>
 
+<li><a href="/users">トップへ戻る</a></li>
+<p>
+<input type="button" value="トップへ戻る" onclick="history.back()">
+</p>
 
-
-
-<a href="/adduser">トップへ戻る</a>
 
 }
 

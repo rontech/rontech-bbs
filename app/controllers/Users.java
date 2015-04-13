@@ -8,14 +8,14 @@ import play.mvc.Result;
 import views.html.*;
 import play.api.mvc.*;
 
-public class Application extends Controller {
+public class Users extends Controller {
 
 	/** ユーザ作成フォーム */
 	static Form<User> userForm = Form.form(User.class);
 
 	/** コントローラのnewUser()にredirect */
     public static Result index() {
-        return redirect(routes.Application.newUser());
+        return redirect(routes.Users.newUser());
     }
 
     /** ユーザの登録画面を表示 */
@@ -38,7 +38,7 @@ public class Application extends Controller {
         /**Userのcreateのメソッドを呼ぶ出す、コントローラのallUsers()にredirect*/
         else {
             User.create(filledForm.get());
-            return redirect(routes.Application.allUsers());
+            return redirect(routes.Users.allUsers());
         }
     }
     /** 全てのユーザ情報を表示 */
@@ -52,7 +52,34 @@ public class Application extends Controller {
     	/**モデルの削除メソッドを呼びたす*/
     	User.delete(id);
     	/**すべて新規ユーザ一覧を表示する*/
-    	return redirect(routes.Application.allUsers());
+    	return redirect(routes.Users.allUsers());
+    }
+    /** ユーザの詳細を表示する*/
+    public static Result selectUser(Long id){
+    	 /** モデル側の選択メソッドを呼ぶ出す*/
+    	User.select(id);
+    	 /** 新しいページを転送する*/
+    	return ok(views.html.updateUser.render(models.User.select(id),userForm));
+    }
+
+    public static Result updateUser(Long id){
+    	 /** ユーザから更新の要求フォーム作成*/
+    	Form<User> filledForm = userForm.bindFromRequest();
+    	/** もしユーザの入力を間違ったら、エラーを表示する */
+    	if(filledForm.hasErrors()) {
+    		return badRequest(
+    				/** 選択画面をリターン */
+    				views.html.updateUser.render(models.User.select(id),filledForm)
+    				);
+
+    	}else{
+    		/** Userの更新メソッドを呼ぶ出して、更新した内容を取り出す */
+    		/** コントローラのallUsers()にredirect */
+    		User.update(filledForm.get());
+          return redirect(routes.Users.allUsers());
+    	}
     }
 
 }
+
+
