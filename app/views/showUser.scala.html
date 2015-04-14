@@ -2,43 +2,49 @@
 
 @import helper._
 
-@main("ユーザ一覧") {
+@main("Rontech社内BBS") {
 
-<h1>ユーザ一覧</h1>
-
-
- <ul>   <h4> 名前 パスワード メールアドレス  管理員</h4>
-
+  <div class="container">
+    <h1>ユーザ一覧</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>名前</th>
+	  <th>パスワード</th>
+	  <th>メールアドレス</th>
+	  <th>管理者</th>
+	  <th>詳細</th>
+	  <th>削除</th>
+        </tr>
+      </thead>
+      <tbody>
         @for(user <- users) {
-	    <li>
-            @user.name
-            @user.password
-            @user.email
-            @user.admin
-
-				@form(routes.Users.deleteUser(user.id)) {
-
-                    <input type="submit" value="削除" >
-                }
-
-				@form(routes.Users.selectUser(user.id)){
-
-					<input type="submit" value="詳細" >
-
-
-
-					<a href="updateUser.scala.html"></a>
+	  <tr>
+            <td> @user.name </td>
+	    <td> @user.password </td>
+	    <td> @user.email </td>
+	    <td>
+	      @if(user.admin == true){
+                管理者
+	      }else{
+                一般ユーザ
+	      }
+            </td>
+            <td>
+	      @form(routes.Users.selectUser(user.id)) {
+	        <button type="submit" class="btn btn-success">詳細</button>
+	      }
+	    </td>
+            <td>
+	      @form(routes.Users.deleteUser(user.id)){
+	        <button type="submit" class="btn btn-danger">削除</button>
+	      }
+            </td>
+          </tr>
+       }
+       </tbody>
+     </table>
+     <a href="/users" class="btn btn-info">ユーザ追加</a><br>
+     <a href="javascript:void(0)" onclick="javascript:history.back()" class="btn btn-warning">戻る</a>
+</div>
 }
-
-}
-</li>
-</ul>
-
-<li><a href="/users">トップへ戻る</a></li>
-<p>
-<input type="button" value="トップへ戻る" onclick="history.back()">
-</p>
-
-
-}
-

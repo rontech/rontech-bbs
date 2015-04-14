@@ -20,7 +20,7 @@ public class Users extends Controller {
 
     /** ユーザの登録画面を表示 */
     public static Result newUser() {
-        return ok(views.html.index.render(userForm));
+        return ok(views.html.newUser.render(userForm));
     }
     /**
      *  フォームからデータを取り出し、
@@ -33,7 +33,7 @@ public class Users extends Controller {
         Form<User> filledForm = userForm.bindFromRequest();
         /** もしユーザの入力を間違ったら、エラーを表示する */
         if (filledForm.hasErrors()) {
-            return badRequest(views.html.index.render(filledForm));
+            return badRequest(views.html.newUser.render(filledForm));
         }
         /**Userのcreateのメソッドを呼ぶ出す、コントローラのallUsers()にredirect*/
         else {
