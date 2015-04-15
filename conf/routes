@@ -3,16 +3,29 @@
 # ~~~~
 
 # Home page
-GET     /                          controllers.Users.index()
+GET             /                               controllers.Users.index()
 
 # Users
 
-GET    /users                    controllers.Users.newUser()
-POST   /users                    controllers.Users.addUser()
-GET    /users/allusers           controllers.Users.allUsers()
-POST   /users/:id/delete         controllers.Users.deleteUser(id:Long)
-POST   /users/:id                controllers.Users.selectUser(id:Long)
-POST   /users/:id/update         controllers.Users.updateUser(id:Long)
+GET             /users                          controllers.Users.newUser()
+POST            /users                          controllers.Users.addUser()
+GET             /users/allusers                 controllers.Users.allUsers()
+POST            /users/:id/delete               controllers.Users.deleteUser(id:Long)
+POST            /users/:id                      controllers.Users.selectUser(id:Long)
+POST            /users/:id/update               controllers.Users.updateUser(id:Long)
+
+GET             /createSampleUser               controllers.Users.createSampleUser()
+
+# login
+
+GET             /login                          controllers.Users.login()
+GET             /logout                         controllers.Users.logout()
+POST            /login                          controllers.Users.authenticate()
+
+# Articles
+GET             /articles                       controllers.Articles.index()
+GET             /articles/new                   controllers.Articles.newArticles()
+POST            /articles/new                   controllers.Articles.addArticles()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

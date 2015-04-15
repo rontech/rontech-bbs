@@ -1,0 +1,13 @@
+@(articles:List[Article])
+
+@main("Rontech社内BBS") {
+    <h1>記事一覧</h1>
+    @for(article <- articles) {
+        <h2>@article.title</h2>
+	<p>@article.article</p>
+    }
+
+    <a href="/articles/new">記事の追加</a><br>
+    <a href="/users/allusers">ユーザ管理へ</a><br>
+    <a href="/logout">ログアウト</a>
+}

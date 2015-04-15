@@ -45,4 +45,9 @@ public class User extends Model {
 	public static void update(User newUser){
 		newUser.update();
 	}
+
+	public static User authenticate(String name,String password){
+		return find.where().eq("name", name).eq("password", password).findUnique();
+	}
+
 }

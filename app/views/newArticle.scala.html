@@ -1,0 +1,14 @@
+@(newForm:Form[Article])
+
+@import helper._
+
+@main("one "){
+	<h1>記事追加</h1>
+
+    @helper.form(routes.Articles.addArticles()){
+        @inputText(newForm("title"),'_label->"タイトル")
+        @textarea(newForm("article"),'_label->"内容", 'rows->3, 'cols->50)
+        <button type="submit">作成</button>
+    }
+    <a href="/articles">記事の一覧へ</a>
+}

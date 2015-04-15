@@ -32,21 +32,36 @@
 
     <div class="form-group">
 	<label class="col-lg-1 control-label">権限</label>
-          <div class="col-lg-10">
+	<div class="col-lg-10">
+        @if(user.admin == true){
             <div class="radio">
 	    <label>
-	      <input type="radio" name="admin" id="optionsRadios1" value="true" checked="">
+	      <input type="radio" name="admin" id="optionsRadios1" value="true" checked="checked">
 	      管理者
             </label>
           </div>
             <div class="radio">
 	    <label>
-	      <input type="radio" name="admin" id="optionsRadios1" value="true" checked="">
+	      <input type="radio" name="admin" id="optionsRadios1" value="false">
 	      一般ユーザ
             </label>
+	    }else{
+           <div class="radio">
+             <label>
+  	       <input type="radio" name="admin" id="optionsRadios1" value="true">
+               管理者
+             </label>
+           </div>
+	   <div class="radio">
+	   <label>
+  	     <input type="radio" name="admin" id="optionsRadios1" value="false" checked="checked">
+	     一般ユーザ
+	   </label>
+	   }
           </div>
-       </div>
+        </div>
      </div>
+
      <button type="submit" class="btn btn-primary">更新</button>
     </fieldset>
   </form>
