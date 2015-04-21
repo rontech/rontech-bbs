@@ -8,6 +8,8 @@
     }
 
     <a href="/articles/new">記事の追加</a><br>
-    <a href="/users/allusers">ユーザ管理へ</a><br>
+    @if(User.checkAdmin(session.get("name")) == true){
+        <a href="/users/allusers">ユーザ管理へ</a><br>
+    }
     <a href="/logout">ログアウト</a>
 }
