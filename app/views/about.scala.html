@@ -1,0 +1,34 @@
+@(article :Article, articleForm:Form[Article])
+
+@import nav.bar
+@import helper._
+
+@main("ロンテック社内BBS"){
+  @bar.render
+  <div class="container">
+  <form action="@routes.Articles.update(article.id)" method="post" class="form-horizontal">
+    <fieldset>
+      <legend>記事の編集</legend>
+        <input type = "hidden" value = "@article.id" name = "id">
+        <div class="form-group">
+        <label class="col-lg-1 control-label">タイトル</label>
+	  <div class="col-xs-5">
+            <input type="text" name="title" class="form-control" value="@article.title">
+          </div>
+        </div>
+
+        <div class="form-group">
+	  <label class="col-lg-1 control-label">内容</label>
+	  <div class="col-xs-5">
+            <textarea  class="form-control" name="article" rows="4" cols="40">@article.article</textarea>
+	  </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">更新</button>
+      </fieldset>
+    </form>
+    @form(routes.Articles.deleteArticle(article.id)) {
+      <button type="submit" class="btn btn-danger">削除</button>
+    }
+  </div>
+}

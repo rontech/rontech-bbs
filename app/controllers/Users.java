@@ -14,11 +14,10 @@ import views.html.*;
 import views.html.user.*;
 import play.api.mvc.*;
 
-
 public class Users extends Controller {
 
     /** ユーザ作成フォーム */
-    static Form<User> userForm = Form.form(User.class);
+    static Form<Forms.newUser> userForm = Form.form(Forms.newUser.class);
     /** ログイン用フォーム */
     static Form<Forms.Login> loginForm = Form.form(Forms.Login.class);
     /** 更新用のフォーム */
@@ -27,7 +26,7 @@ public class Users extends Controller {
     /** コントローラのnewUser()にredirect */
     @Security.Authenticated(Secured.class)
     public static Result index() {
-    	 return ok(index.render(Article.find.all()));
+    	 return redirect(routes.Articles.index());
     }
 
     /** ユーザの登録画面を表示 */
@@ -56,7 +55,7 @@ public class Users extends Controller {
     /** ユーザの追加 */
     @Security.Authenticated(Secured.class)
     public static Result addUser() {
-        Form<User> filledForm = userForm.bindFromRequest();
+        Form<Forms.newUser> filledForm = userForm.bindFromRequest();
         if (filledForm.hasErrors()) {
             return badRequest(newUser.render(filledForm));
         }
@@ -69,21 +68,33 @@ public class Users extends Controller {
     /**すべて新規ユーザ一覧を表示する*/
     @Security.Authenticated(Secured.class)
     public static Result allUsers() {
-        return ok(showUser.render(User.all()));
+        if(User.checkAdmin(session("name")) == true){
+            return ok(showUser.render(User.all()));
+	}else{
+            return redirect(routes.Users.index());
+	}
     }
 
     /** ユーザ削除 */
     @Security.Authenticated(Secured.class)
     public static Result deleteUser(Long id){
-    	User.delete(id);
-    	return redirect(routes.Users.allUsers());
+        if(User.checkAdmin(session("name")) == true){
+    	    User.delete(id);
+    	    return redirect(routes.Users.allUsers());
+	}else{
+            return redirect(routes.Users.index());
+	}
     }
 
     /** ユーザの詳細を表示する*/
     @Security.Authenticated(Secured.class)
     public static Result selectUser(Long id){
-    	User.select(id);
-    	return ok(updateUser.render(User.select(id), updateForm));
+        if(User.checkAdmin(session("name")) == true){
+    	    User.select(id);
+    	    return ok(updateUser.render(User.select(id), updateForm));
+        }else{
+            return redirect(routes.Users.index());
+        }
     }
 
     /** ユーザ情報の更新を行う */
@@ -94,21 +105,36 @@ public class Users extends Controller {
     	    return badRequest(
     	        updateUser.render(User.select(id),filledForm)
     	    );
-    	}else{
-    	  User.update(filledForm.get());
-          return redirect(routes.Users.allUsers());
     	}
+        User.update(filledForm.get());
+        return redirect(routes.Users.allUsers());
     }
 
     public static Result login(){
-    	return ok(login.render(loginForm));
+        return ok(login.render(loginForm));
     }
 
     public static Result logout(){
-    	session().clear();
-	return redirect(routes.Users.login());
+        session().clear();
+        return redirect(routes.Users.login());
     }
-    
+
+    /** マイページの表示 */
+    public static Result mypage(Long id){
+        return ok(mypage.render(User.find.ref(id),updateForm));
+    }
+
+    /** マイページの更新 */
+    public static Result updateMypage(Long id){
+        Form<Forms.Renew> filledForm = updateForm.bindFromRequest();
+        if(filledForm.hasErrors()) {
+            return badRequest(mypage.render(User.find.ref(id), filledForm));
+	} else {
+            User.updateMypage(filledForm.get());
+            return redirect(routes.Users.index());
+        }
+    }
+
     /** ログイン認証 */
     public static Result authenticate(){
     	Form<Forms.Login> filledForm = loginForm.bindFromRequest();

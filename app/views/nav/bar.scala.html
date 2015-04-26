@@ -1,0 +1,24 @@
+@import helper._
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a href="/articles" class="navbar-brand">記事の一覧</a>
+    </div>
+    <div class="navbar-header">
+      <a href="/articles/new" class="navbar-brand">記事の追加</a>
+    </div>
+    @if(User.checkAdmin(session.get("name")) == true){
+    <div class="navbar-header">
+      <a href="/users/allusers" class="navbar-brand">ユーザ管理</a>
+    </div>
+    }
+    <div class="navbar-header">
+    <form action="@routes.Users.mypage(User.checkId(session.get("name")))" method="post" name="mypageForm">
+      <a href="javascript:document.mypageForm.submit();" class="navbar-brand">マイページ</a>
+    </form>
+    </div>
+    <div class="navbar-header">
+      <a href="/logout" class="navbar-brand">ログアウト</a>
+    </div>
+  </div>
+</nav>

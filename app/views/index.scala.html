@@ -1,15 +1,30 @@
 @(articles:List[Article])
 
-@main("Rontech社内BBS") {
-    <h1>記事一覧</h1>
-    @for(article <- articles) {
-        <h2>@article.title</h2>
-	<p>@article.article</p>
-    }
+@import nav.bar
+@import helper._
 
-    <a href="/articles/new">記事の追加</a><br>
-    @if(User.checkAdmin(session.get("name")) == true){
-        <a href="/users/allusers">ユーザ管理へ</a><br>
+@main("ロンテック社内BBS") {
+  @bar.render
+  <div class="container">
+	  <h1>記事一覧</h1>
+  <div class="row">
+  <div class="element">
+      @for(article <- articles) {
+        <div class="col-xs-12 col-sm-6 col-md-3 target">
+        <div class="thumbnail">
+          <h4 class="text-center">@article.title</h4>
+	  <div class="caption">
+	    <p>
+	      @Html(article.article.replaceAll("(\r\n|\r|\n)","<br>"))
+	    </p>
+          </div>
+	@form(routes.Articles.update(article.id)) {
+	  <button type="submit" class="btn btn-success">編集</button>
+	}
+	</div>
+      </div>
     }
-    <a href="/logout">ログアウト</a>
+    </div>
+    </div>
+  </div>
 }

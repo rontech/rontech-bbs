@@ -1,11 +1,10 @@
 @(users: List[User])
 
 @import helper._
+@import nav.manageBar
 
-
-
-@main("Rontech社内BBS") {
-
+@main("ロンテック社内BBS") {
+  @manageBar.render
   <div class="container">
     <h1>ユーザ一覧</h1>
     <table class="table">
@@ -46,7 +45,5 @@
        }
        </tbody>
      </table>
-     <a href="/users" class="btn btn-info">ユーザ追加</a><br>
-     <a href="/" class="btn btn-warning">記事の一覧へ戻る</a>
 </div>
 }

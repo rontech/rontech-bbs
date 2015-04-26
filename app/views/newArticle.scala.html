@@ -1,14 +1,31 @@
 @(newForm:Form[Article])
 
+@import nav.bar
 @import helper._
 
-@main("one "){
-	<h1>記事追加</h1>
+@main("ロンテック社内BBS"){
+  @bar.render
+  <div class="container">
+  <form action="@routes.Articles.addArticles()" method="post" class="form-horizontal">
+    <fieldset>
+      <legend>新規作成</legend>
+        <div class="form-group">
+        <label class="col-lg-1 control-label">タイトル</label>
+          <div class="col-xs-5">
+            <input type="text" name="title" class="form-control" placeholder="記事のタイトルを入力して下さい。">
+          </div>
+	</div>
 
-    @helper.form(routes.Articles.addArticles()){
-        @inputText(newForm("title"),'_label->"タイトル")
-        @textarea(newForm("article"),'_label->"内容", 'rows->3, 'cols->50)
-        <button type="submit">作成</button>
-    }
-    <a href="/articles">記事の一覧へ</a>
+        <div class="form-group">
+        <label class="col-lg-1 control-label">内容</label>
+	  <div class="col-xs-5">
+            <textarea class="form-control" name="article" rows="4" cols="40" placeholder="記事の内容を入力してください">
+            </textarea>
+          </div>
+        </div>
+	
+        <button type="submit" class="btn btn-primary">作成</button>
+    </fieldset>
+  </form>
+  </div>
 }

@@ -3,18 +3,30 @@
 @import helper._
 
 @main("Rontech社内BBS"){
-    <h1>ログイン</h1>
-    @if(loginForm.hasGlobalErrors){
-        <p class="error">
-	    @loginForm.globalError.message
-	</p>
-    }
+    <form action="@routes.Users.authenticate" method="post" class="form-horizontal">
+      <fieldset>
+	<legend>ログイン</legend>
+        @if(loginForm.hasGlobalErrors){
+           <p class="text-danger">
+             @loginForm.globalError.message
+           </p>
+        }
+        <div class="form-group">
+          <label class="col-lg-1 control-label">名前</label>
+	  <div class="col-xs-5">
+            <input type="text" name="name" class="form-control" placeholder="名前を入力してください。">
+	  </div>
+        </div>
 
-    @form(routes.Users.authenticate){
-        @inputText(loginForm("name"))
-        @inputPassword(loginForm("password"))
+        <div class="form-group">
+          <label for="inputPassword" class="col-lg-1 control-label">パスワード</label>
+          <div class="col-xs-5">
+	    <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
+          </div>
+        </div>
 
-        <button type="submit">ログイン</button>
-    }
+	<button type="submit" class="btn btn-info">ログイン</button>
+      </fieldset>
+    </form>
     <a href="/createSampleUser">サンプルユーザ作成</a>
 }

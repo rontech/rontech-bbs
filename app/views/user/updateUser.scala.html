@@ -1,37 +1,39 @@
 @(user: User,userForm:Form[Forms.Renew])
 
-
+@import nav.manageBar
 @import helper._
 
-@main("Rontech社内BBS") {
+@main("ロンテック社内BBS") {
+  @manageBar.render
+  <div class="container">
   <form action="@routes.Users.updateUser(user id)" method="post" class="form-horizontal">
     <fieldset>
     <legend>ユーザ更新</legend>
     <input type="hidden" value="@user.id" name="id">
 
     <div class="form-group">
-      <label class="col-lg-1 control-label">名前</label>  
+      <label class="col-lg-2 control-label">名前</label>  
         <div class="col-xs-5">
           <input type="text" value="@user.name" name="name" class="form-control">
 	</div>
     </div>
 
     <div class="form-group">
-      <label for="inputPassword" class="col-lg-1 control-label">パスワード</label>
+      <label for="inputPassword" class="col-lg-2 control-label">パスワード</label>
       <div class="col-xs-5">
         <input type="text" value="@user.password" name="password" class="form-control">
       </div>
     </div>
 
     <div class="form-group">
-      <label for="inputEmail" class="col-lg-1 control-label">Email</label>
+      <label for="inputEmail" class="col-lg-2 control-label">Email</label>
       <div class="col-xs-5">
 	<input type="text" value="@user.email" name="email" class="form-control">
       </div>
     </div>
 
     <div class="form-group">
-	<label class="col-lg-1 control-label">権限</label>
+	<label class="col-lg-2 control-label">権限</label>
 	<div class="col-lg-10">
         @if(user.admin == true){
             <div class="radio">
@@ -65,7 +67,5 @@
      <button type="submit" class="btn btn-primary">更新</button>
     </fieldset>
   </form>
-
-  <a href="/users" class="btn btn-info">ユーザ追加</a><br>
-  <a href="javascript:void(0)" onclick="javascript:history.back()" class="btn btn-warning">戻る</a>
+  </div>
 }

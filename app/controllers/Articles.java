@@ -18,6 +18,7 @@ public class Articles extends Controller {
         );
     }
 
+    /** 新規記事作成ページ */
     @Security.Authenticated(Secured.class)
     public static Result newArticles() {
     	return ok (
@@ -36,5 +37,31 @@ public class Articles extends Controller {
     	    Article.create(filledForm.get());
     	    return redirect(routes.Articles.index());
     	}
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result aboutArticles(Long id) {
+        return ok (
+	    views.html.about.render(Article.select(id),articleForm)
+        );
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result deleteArticle(Long id) {
+        Article.delete(id);
+	return redirect(routes.Articles.index());
+    }
+
+    @Security.Authenticated(Secured.class)
+    public static Result update(Long id){
+        Form<Article> filledForm = articleForm.bindFromRequest();
+        if(filledForm.hasErrors()) {
+            return badRequest(
+                views.html.about.render(models.Article.select(id), filledForm)
+            );
+        } else {
+            Article.change(filledForm.get());
+            return redirect(routes.Articles.index());
+        }
     }
 }

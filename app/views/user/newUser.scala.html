@@ -1,34 +1,36 @@
-@(userForm: Form[User])
-
+@(userForm: Form[Forms.newUser])
+@import nav.manageBar
 @import helper._
 
-@main("Rontech社内BBS"){
+@main("ロンテック社内BBS"){
+  @manageBar.render
+  <div class="container">
   <form action="@routes.Users.addUser()" method="post" class="form-horizontal">
       <fieldset>
           <legend>新規ユーザ登録</legend>
           <div class="form-group">
-          <label class="col-lg-1 control-label">名前</label>
+          <label class="col-lg-2 control-label">名前</label>
             <div class="col-xs-5">
               <input type="text" name="name" class="form-control" placeholder="名前を入力してください。">
             </div>
           </div>
 
           <div class="form-group">
-          <label for="inputPassword" class="col-lg-1 control-label">パスワード</label>
+          <label for="inputPassword" class="col-lg-2 control-label">パスワード</label>
             <div class="col-xs-5">
               <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
             </div>
           </div>
 
           <div class="form-group">
-          <label for="inputEmail" class="col-lg-1 control-label">Email</label>
+          <label for="inputEmail" class="col-lg-2 control-label">メールアドレス</label>
             <div class="col-xs-5">
               <input type="text" name="email" class="form-control" id="inputEmail" placeholder="Email">
             </div>
           </div>
 
           <div class="form-group">
-          <label class="col-lg-1 control-label">権限</label>
+          <label class="col-lg-2 control-label">権限</label>
             <div class="col-lg-10">
             <div class="radio">
               <label>
@@ -53,5 +55,5 @@
          </div>
        </fieldset>
    </form>
-   <a href="/users/allusers" class="btn btn-link">ユーザ一覧へ</a>
+   </div>
 }

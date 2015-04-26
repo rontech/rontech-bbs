@@ -1,0 +1,21 @@
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <a href="/articles" class="navbar-brand">記事の一覧</a>
+    </div>
+    <div class="navbar-header">
+      <a href="/users/allusers" class="navbar-brand">ユーザの一覧</a>
+    </div>
+    <div class="navbar-header">
+      <a href="/users/add" class="navbar-brand">ユーザの追加</a>
+    </div>
+    <div class="navbar-header">
+      <form action="@routes.Users.mypage(User.checkId(session.get("name")))" method="post" name="mypageForm">
+        <a href="javascript:document.mypageForm.submit();" class="navbar-brand">マイページ</a>
+      </form>
+    </div>
+    <div class="navbar-header">
+      <a href="/logout" class="navbar-brand">ログアウト</a>
+    </div>
+  </div>
+</nav>  
