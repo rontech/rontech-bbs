@@ -6,7 +6,7 @@
 create table article (
   id                        bigint not null,
   title                     varchar(255),
-  article                   varchar(255),
+  article                   text,
   user_id                   bigint,
   constraint pk_article primary key (id))
 ;

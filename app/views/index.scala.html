@@ -17,6 +17,7 @@
 	    <p>
 	      @Html(article.article.replaceAll("(\r\n|\r|\n)","<br>"))
 	    </p>
+            <p>Write by @User.selectName(article.user_id)</p>
           </div>
 	@form(routes.Articles.update(article.id)) {
 	  <button type="submit" class="btn btn-success">編集</button>

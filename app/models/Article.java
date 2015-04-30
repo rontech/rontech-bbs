@@ -2,19 +2,24 @@ package models;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-import play.data.validation.Constraints.Required;
+import javax.persistence.*;
+import play.data.validation.Constraints.*;
 import play.db.ebean.Model;
 
 @Entity
 public class Article extends Model {
     @Id
     public Long id;
+
     @Required
+    @MinLength(5)
+    @MaxLength(100)
     public String title;
+
     @Required
+    @Column(name="article", columnDefinition="text")
+    @MinLength(5)
+    @MaxLength(1000)
     public String article;
 
     public Long user_id;

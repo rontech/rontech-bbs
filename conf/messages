@@ -1,0 +1,3 @@
+error.required=入力必須項目です。
+error.minLength=タイトルは5文字以上でお願いします。
+error.maxLength=1000文字以下でお願いします。

@@ -121,16 +121,18 @@ public class Users extends Controller {
 
     /** マイページの表示 */
     public static Result mypage(Long id){
-        return ok(mypage.render(User.find.ref(id),updateForm));
+      return ok(mypage.render(User.find.ref(id),updateForm,Article.find.all()));
     }
 
     /** マイページの更新 */
     public static Result updateMypage(Long id){
         Form<Forms.Renew> filledForm = updateForm.bindFromRequest();
         if(filledForm.hasErrors()) {
-            return badRequest(mypage.render(User.find.ref(id), filledForm));
+            return badRequest(mypage.render(User.find.ref(id), filledForm, Article.find.all()));
 	} else {
             User.updateMypage(filledForm.get());
+	    session().clear();
+            session("name",filledForm.get().name);
             return redirect(routes.Users.index());
         }
     }

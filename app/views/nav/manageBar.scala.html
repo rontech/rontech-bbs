@@ -17,5 +17,11 @@
     <div class="navbar-header">
       <a href="/logout" class="navbar-brand">ログアウト</a>
     </div>
+
+    <form action="@routes.Users.mypage(User.checkId(session.get("name")))" method="post" name="mySessionForm">
+      <p class="text-right" style="color:#ddd;">ログイン中：
+      <a href="javascript:document.mySessionForm.submit();">@session.get("name")</a>
+      さん</p>
+    </form>
   </div>
 </nav>  

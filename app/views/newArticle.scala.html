@@ -14,16 +14,24 @@
           <div class="col-xs-5">
             <input type="text" name="title" class="form-control" placeholder="記事のタイトルを入力して下さい。">
           </div>
+	  @for(error <- newForm("title").errors){
+	    <p class="text-danger">@Messages(error.message)</p>
+          }
 	</div>
 
         <div class="form-group">
         <label class="col-lg-1 control-label">内容</label>
 	  <div class="col-xs-5">
-            <textarea class="form-control" name="article" rows="4" cols="40" placeholder="記事の内容を入力してください">
-            </textarea>
-          </div>
+            <textarea class="form-control" name="article" rows="4" cols="40"
+              placeholder="記事の内容を入力してください"></textarea>
+	  </div>
+          @for(error <- newForm("article").errors){   
+            <p class="text-danger">@Messages(error.message)</p>
+          }
         </div>
-	
+
+           <input type="hidden" name="user_id" value="@User.checkId(session.get("name"))">
+
         <button type="submit" class="btn btn-primary">作成</button>
     </fieldset>
   </form>

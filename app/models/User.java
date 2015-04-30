@@ -95,4 +95,10 @@ public class User extends Model {
         User user = find.where().eq("name",name).findUnique();
         return user.id;
     }
+
+    /** ユーザIDからユーザ名を返す */
+    public static String selectName(Long id){
+        User user  = User.find.ref(id);
+        return user.name;
+    }
 }
