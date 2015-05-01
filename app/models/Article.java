@@ -32,6 +32,11 @@ public class Article extends Model {
         return find.all();
     }
 
+    /** 自分の書いた記事のみを検索する */
+    public static List<Article> myAll(Long userId) {
+        return find.where().eq("user_id", userId).findList();
+    }
+
     public static void create(Article article) {
         article.save();
     }

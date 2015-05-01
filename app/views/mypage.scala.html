@@ -45,6 +45,11 @@
 
   
     <h1>自分の記事一覧</h1>
+    @if(articles.isEmpty){
+      <p class="text-warning">あなたの投稿はまだありません。</p>
+      <p>今すぐ投稿しましょう！<br>
+      <a href="/articles/new" class="btn-link">記事追加へ</a></p>
+    } else {
       <div class="row">
         <div class="element">
         @for(article <- articles) {
@@ -65,5 +70,6 @@
        }
      </div>
     </div>
+  }
   </div>
 }

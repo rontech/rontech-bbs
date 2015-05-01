@@ -121,7 +121,7 @@ public class Users extends Controller {
 
     /** マイページの表示 */
     public static Result mypage(Long id){
-      return ok(mypage.render(User.find.ref(id),updateForm,Article.find.all()));
+      return ok(mypage.render(User.find.ref(id),updateForm,Article.myAll(id)));
     }
 
     /** マイページの更新 */
