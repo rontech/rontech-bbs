@@ -7,7 +7,7 @@
     <div class="navbar-header">
       <a href="/articles/new" class="navbar-brand">記事の追加</a>
     </div>
-    @if(User.checkAdmin(session.get("name")) == true){
+    @if(User.checkAdmin(session.get("name"))){
     <div class="navbar-header">
       <a href="/users/allusers" class="navbar-brand">ユーザ管理</a>
     </div>

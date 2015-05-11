@@ -19,9 +19,11 @@
 	    </p>
             <p>Write by @User.selectName(article.user_id)</p>
           </div>
-	@form(routes.Articles.update(article.id)) {
-	  <button type="submit" class="btn btn-success">編集</button>
-	}
+        @if(User.selectName(article.user_id) == session.get("name") || User.checkAdmin(session.get("name"))){
+	  @form(routes.Articles.update(article.id)) {
+	    <button type="submit" class="btn btn-success">編集</button>
+          }
+        }
 	</div>
       </div>
     }
